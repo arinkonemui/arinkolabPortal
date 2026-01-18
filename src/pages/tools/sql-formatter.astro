@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="SQL フォーマッター"
+  description="複雑な SQL クエリを自動整形します。可読性を高め、デバッグを容易にします。"
+>
+  <h1>SQL フォーマッター</h1>
+
+  <p>
+    SQL フォーマッターは、複雑で読みにくい SQL クエリを自動的に整形し、可読性を大幅に向上させるツールです。
+  </p>
+
+  <p>
+    インデント、スペース、改行を適切に調整することで、デバッグやメンテナンスが容易になります。
+  </p>
+
+  <h2>できること</h2>
+  <ul>
+    <li>複雑な SQL クエリの自動整形</li>
+    <li>複数のデータベース方言に対応（MySQL, PostgreSQL, SQL Server など）</li>
+    <li>カスタムフォーマットルールのサポート</li>
+    <li>整形結果の即座確認と コピー機能</li>
+  </ul>
+
+  <h2>ユースケース</h2>
+  <ul>
+    <li><strong>レガシーコード保守</strong>：整形されていない古い SQL を読みやすくする</li>
+    <li><strong>コードレビュー</strong>：チームメンバーと整形済みコードで統一的な議論を行う</li>
+    <li><strong>ドキュメント作成</strong>：可読性の高い SQL をドキュメントに掲載する</li>
+  </ul>
+
+  <h2>使用例</h2>
+  <div class="sample-container">
+    <div class="sample-before">
+      <h4>整形前</h4>
+      <div class="sample-code">SELECT id, name, email FROM users WHERE status='active' AND created_at > '2024-01-01' ORDER BY created_at DESC;</div>
+    </div>
+    <div class="sample-after">
+      <h4>整形後</h4>
+      <div class="sample-code">SELECT<br/>&nbsp;&nbsp;id,<br/>&nbsp;&nbsp;name,<br/>&nbsp;&nbsp;email<br/>FROM users<br/>WHERE<br/>&nbsp;&nbsp;status = 'active'<br/>&nbsp;&nbsp;AND created_at > '2024-01-01'<br/>ORDER BY created_at DESC;</div>
+    </div>
+  </div>
+
+  <h2>注意事項</h2>
+  <ul>
+    <li><strong>機密情報の入力を避けてください</strong>：パスワード、API キー、個人情報などを入力しないようお願いします</li>
+    <li><strong>免責事項</strong>：このツールは出力結果の正確性を保証いたしません。重要なクエリは必ず本番前に検証してください</li>
+    <li><strong>データベース方言</strong>：特定の方言でのみサポートされる構文については、別途確認が必要な場合があります</li>
+    <li><strong>複雑なクエリ</strong>：極度に複雑なクエリや特殊な拡張構文は、正しく整形されない可能性があります</li>
+  </ul>
+
+  <h2>ツールを使用する</h2>
+  <p>
+    <a href="https://sqlformatter.arinkolab.com/">SQL フォーマッターツール本体を開く</a>（新しいタブで開きます）
+  </p>
+
+  <p>
+    <a href="/tools/">ツール一覧に戻る</a>
+  </p>
+</BaseLayout>

@@ -1,0 +1,73 @@
+<header>
+  <nav class="header-nav">
+    <div class="header-brand">
+      <a href="/">ArinkoLab</a>
+    </div>
+    <ul class="header-links">
+      <li><a href="/tools/">ツール</a></li>
+      <li><a href="/blog/">ブログ</a></li>
+      <li><a href="/faq/">FAQ</a></li>
+      <li><a href="/contact/">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 0 1rem;
+  }
+
+  .header-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .header-brand a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
+    text-decoration: none;
+  }
+
+  .header-brand a:hover {
+    color: #0066cc;
+  }
+
+  .header-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  .header-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .header-links a:hover {
+    color: #0066cc;
+  }
+
+  @media (max-width: 768px) {
+    .header-nav {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .header-links {
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .header-brand a {
+      font-size: 1.2rem;
+    }
+  }
+</style>

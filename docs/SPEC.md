@@ -10,7 +10,7 @@ AdSense 再審査で指摘された「パブリッシャーのコンテンツが
 - 既存ツール本体: `https://sqlformatter.arinkolab.com`（Cloudflare Pages）
 - ブログ: `https://blog.arinkolab.com`（Cloudflare Pages / Hugo）
 - メディア: `https://media.arinkolab.com`（Cloudflare R2 + カスタムドメイン）※現時点では主にブログ用
-- お問い合わせ: Googleフォーム（URLは実装時に差し込み）
+- お問い合わせ: Googleフォーム（https://forms.gle/6nRrqn4BniyQsPAF9）
 - 運用方針: 作りかけコンテンツは公開しない（空ページ/近日公開/準備中を出さない）
 
 ## ゴール（MVP）
@@ -19,6 +19,7 @@ AdSense 再審査で指摘された「パブリッシャーのコンテンツが
 - ツール紹介ページに説明・サンプル・注意事項がある
 - blog はポータル内で「案内ページ（本文＋リンク）」として導線を用意
 - AdSense 再審査に耐える体裁（本文、規約、問い合わせ、運営者情報）
+- （推奨）`public/robots.txt` と `public/sitemap.xml` を配置し、検索エンジンの発見性を補助する
 
 ## サイトマップ（MVP）
 - `/` トップ（本文あり）
@@ -61,3 +62,11 @@ AdSense 再審査で指摘された「パブリッシャーのコンテンツが
 - ポータル内でのログイン/DB/動的検索（必要になったら Pages Functions / Workers を検討）
 - ブログ記事自体のホスティング（blog.arinkolab.com が担当）
 - media.arinkolab.com での画像加工機能（将来候補として記録はする）
+
+## SEO 補助（推奨）
+新規サイトはクロール・インデックスの反映が遅れがちなので、MVPでも以下を配置する。
+
+- `public/robots.txt`：クロール許可と sitemap の場所を明示
+- `public/sitemap.xml`：主要ページの一覧を明示（小規模でも有効）
+
+※必須要件ではないが、運用コストが低くメリットが大きいため「任意だが入れる」方針とする。

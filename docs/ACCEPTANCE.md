@@ -32,3 +32,7 @@
 ## 手動確認
 - [ ] シークレットで `https://arinkolab.com/ads.txt` を開いて正常（キャッシュ誤判定を避ける）
 - [ ] モバイル幅でも最低限読める（崩壊しない）
+
+## 推奨（SEO）
+- [ ] `public/robots.txt` が存在し、Sitemap を指している
+- [ ] `public/sitemap.xml` が存在し、MVPの主要ページURLが含まれている
