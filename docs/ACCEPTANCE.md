@@ -9,19 +9,23 @@
   - [ ] `/tools/`
   - [ ] `/tools/business/`
   - [ ] `/tools/general/`
-  - [ ] `/tools/gamer/`
   - [ ] `/tools/sql-formatter/`
   - [ ] `/blog/`
   - [ ] `/faq/`
   - [ ] `/privacy/`
   - [ ] `/terms/`
-  - [ ] `/contact/`
   - [ ] `/about/`
+  - [ ] `/contact/`
+
+## UI（今回の追加）
+- [ ] トップに「三本柱」カードが3つある（Business / General / Blog）
+- [ ] カードは初回表示で **左→右に少しスライドしながらフェードイン**する
+- [ ] `prefers-reduced-motion: reduce` ではアニメが無効になる
 
 ## コンテンツ要件（審査観点）
 - [ ] トップにサイト説明（複数段落）、ツール紹介、ブログ導線、注意事項がある
 - [ ] SQL Formatter 紹介ページに「サンプル（整形前/後）」がある
-- [ ] Contact が Googleフォームへ誘導できる
+- [ ] Contact が Googleフォームへ誘導できる（URLが正しい）
 - [ ] 「準備中/工事中/近日公開」だけのページが無い
 - [ ] リンク切れ（404誘導）が無い
 
