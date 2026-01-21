@@ -16,38 +16,159 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     効率的な開発をサポートするツールから、個人の日々の気づきやゲーム攻略記までを、一つの場所でお届けします。
   </p>
 
-  <h2>できること</h2>
-  <ul>
-    <li><strong>SQL フォーマッター</strong>：複雑な SQL 文を自動的に整形し、可読性を向上させます</li>
-    <li><strong>カテゴリ別ツール検索</strong>：ビジネス向け、一般向け、ゲーマー向けツールを用途別に検索</li>
-    <li><strong>開発ログ・日記閲覧</strong>：定期更新される開発ログやゲーム攻略日記をご覧いただけます</li>
-  </ul>
+  <h2>サービス一覧</h2>
 
-  <h2>人気ツール</h2>
-  <div style="border: 1px solid #ddd; border-radius: 4px; padding: 1rem; background-color: #fff; margin: 1rem 0;">
-    <h3 style="margin-top: 0;">SQL フォーマッター</h3>
-    <p>
-      複雑な SQL クエリを整形します。可読性を高め、デバッグを容易にするための強力なツールです。
-    </p>
-    <p>
-      <a href="/tools/sql-formatter/">詳細を見る</a>
-      または
-      <a href="https://sqlformatter.arinkolab.com/">ツールを開く</a>
-    </p>
+  <div class="service-grid">
+    <!-- ビジネス向けアプリ -->
+    <div class="pillar-card">
+      <div class="card-header card-header-business">
+        <h3>ビジネス向けアプリ</h3>
+      </div>
+      <div class="card-body">
+        <p>業務効率化や開発支援を目的としたプロダクティビティツールです。SQLの整形やデータ処理を高速に行えます。</p>
+        <p><a href="/tools/business/">詳細を見る</a></p>
+      </div>
+    </div>
+
+    <!-- 便利アプリ -->
+    <div class="pillar-card">
+      <div class="card-header card-header-general">
+        <h3>便利アプリ</h3>
+      </div>
+      <div class="card-body">
+        <p>日常的に役立つ汎用ツールをご紹介します。テキスト処理や単位変換など、気軽に使えるウェブアプリが揃っています。</p>
+        <p><a href="/tools/general/">詳細を見る</a></p>
+      </div>
+    </div>
+
+    <!-- ブログ -->
+    <div class="pillar-card">
+      <div class="card-header card-header-blog">
+        <h3>ブログ</h3>
+      </div>
+      <div class="card-body">
+        <p>開発ログから日常の気づき、ゲーム攻略まで。幅広いテーマで、定期的に更新される記事をお楽しみください。</p>
+        <p><a href="/blog/">詳細を見る</a></p>
+      </div>
+    </div>
   </div>
 
-  <h2>開発ログとメモ</h2>
-  <p>
-    このポータルのブログセクションでは、開発作業中に得られた知見、トラブルシューティング、そしてゲーム攻略日記など、様々なコンテンツを公開しています。
-  </p>
-  <p>
-    定期更新される記事をチェックするには、<a href="/blog/">ブログページ</a>をご覧ください。
-  </p>
+  <h2>人気ツール</h2>
+
+  <div class="popular-tool">
+    <div class="tool-accent">
+      <h3>SQL フォーマッター</h3>
+      <p>
+        複雑な SQL クエリを整形します。可読性を高め、デバッグを容易にするための強力なツールです。
+        複数のデータベース方言に対応し、即座に結果を確認できます。
+      </p>
+      <p>
+        <a href="/tools/sql-formatter/">ツール紹介ページを見る</a>
+        または
+        <a href="https://sqlformatter.arinkolab.com/" target="_blank">ツールを開く（新しいタブ）</a>
+      </p>
+    </div>
+  </div>
 
   <h2>ご注意</h2>
   <ul>
-    <li><strong>機密情報のご入力はお控えください</strong>：ツール側で機密情報の取り扱いについて責任を負いません</li>
-    <li><strong>免責事項</strong>：ツールの出力の正確性を保証いたしません。重要な処理では検証をお願いします</li>
-    <li><strong>利用規約</strong>：詳細は<a href="/terms/">利用規約</a>をご覧ください</li>
+    <li><strong>機密情報のご入力はお控えください</strong>：パスワード、API キー、個人情報などの機密データをツールに入力しないようお願いします</li>
+    <li><strong>出力の正確性は保証いたしません</strong>：重要な処理では必ず検証をお願いします</li>
+    <li><strong>自己責任での利用</strong>：詳細は<a href="/terms/">利用規約</a>をご覧ください</li>
   </ul>
 </BaseLayout>
+
+<style>
+  @keyframes slideInFade {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .pillar-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    animation: slideInFade 0.6s ease-out forwards;
+  }
+
+  .service-grid .pillar-card:nth-child(1) {
+    animation-delay: 0ms;
+  }
+
+  .service-grid .pillar-card:nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .service-grid .pillar-card:nth-child(3) {
+    animation-delay: 160ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pillar-card {
+      animation: none;
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .card-header {
+    color: #fff;
+    padding: 1rem;
+  }
+
+  .card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .card-header-business {
+    background-color: var(--pillar-business);
+  }
+
+  .card-header-general {
+    background-color: var(--pillar-general);
+  }
+
+  .card-header-blog {
+    background-color: var(--pillar-blog);
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .popular-tool {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 2rem;
+    background-color: #fff;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .tool-accent {
+    border-left: 4px solid var(--pillar-business);
+    padding-left: 1rem;
+  }
+
+  .tool-accent h3 {
+    margin-top: 0;
+    color: var(--pillar-business);
+  }
+</style>

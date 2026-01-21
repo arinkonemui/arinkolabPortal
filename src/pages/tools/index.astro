@@ -4,27 +4,67 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="ツール一覧"
-  description="ArinkoLabの開発ツール一覧。カテゴリ別に便利なツールをご紹介します。"
+  description="ArinkoLabの開発ツール。ビジネス向け、便利アプリなど、様々なツールをご紹介します。"
 >
   <h1>ツール一覧</h1>
 
   <p>
-    ArinkoLabで公開されているツールを、用途別カテゴリでご紹介します。各ツールの詳細説明とサンプルは、カテゴリページをご覧ください。
+    ArinkoLabで公開されているツールを、用途別カテゴリでご紹介します。
+    各ツールの詳細説明、使用例、注意事項はカテゴリページをご覧ください。
   </p>
-
-  <h2>カテゴリ</h2>
-  <ul>
-    <li><a href="/tools/business/">ビジネス向けツール</a></li>
-    <li><a href="/tools/general/">一般向け便利ツール</a></li>
-    <li><a href="/tools/gamer/">ゲーマー向けツール</a></li>
-  </ul>
-
-  <h2>全ツール</h2>
-  <ul>
-    <li><a href="/tools/sql-formatter/">SQL フォーマッター</a>（ビジネス向け）</li>
-  </ul>
 
   <p>
-    新しいツールは随時追加予定です。最新情報は<a href="/contact/">お問い合わせ</a>フォームからご質問ください。
+    すべてのツールは無料でご利用いただけます。ご質問やご提案は<a href="/contact/">お問い合わせ</a>までお気軽にお寄せください。
   </p>
+
+  <h2>ツールカテゴリ</h2>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+    <!-- ビジネス向けアプリ -->
+    <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div style="background-color: var(--pillar-business); color: #fff; padding: 1rem;">
+        <h3 style="margin: 0; font-size: 1.1rem; color: #fff;">ビジネス向けアプリ</h3>
+      </div>
+      <div style="padding: 1.5rem;">
+        <p>
+          開発業務やデータ処理の効率化を目的としたツール。SQL フォーマッターなど、業務支援ツールが揃っています。
+        </p>
+        <p>
+          <a href="/tools/business/">ビジネス向けアプリを見る →</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- 便利アプリ -->
+    <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div style="background-color: var(--pillar-general); color: #fff; padding: 1rem;">
+        <h3 style="margin: 0; font-size: 1.1rem; color: #fff;">便利アプリ</h3>
+      </div>
+      <div style="padding: 1.5rem;">
+        <p>
+          日常的に役立つ汎用ツール。開発経験を問わず気軽に使えるウェブアプリです。テキスト処理や単位変換など。
+        </p>
+        <p>
+          <a href="/tools/general/">便利アプリを見る →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <h2>公開中のツール一覧</h2>
+  <ul>
+    <li><a href="/tools/sql-formatter/">SQL フォーマッター</a>（ビジネス向け）— 複雑な SQL クエリを自動整形し、可読性を向上させます</li>
+  </ul>
+
+  <h2>ツール開発中</h2>
+  <p>
+    より多くの便利なツールを開発・公開予定です。最新情報は<a href="/blog/">ブログ</a>でお知らせします。
+  </p>
+
+  <h2>ご注意</h2>
+  <ul>
+    <li>機密情報（パスワード、API キー、個人情報）を入力しないようお願いします</li>
+    <li>ツールの出力結果の正確性は保証いたしません。重要な処理では必ず検証してください</li>
+    <li>詳細は<a href="/terms/">利用規約</a>をご覧ください</li>
+  </ul>
 </BaseLayout>
