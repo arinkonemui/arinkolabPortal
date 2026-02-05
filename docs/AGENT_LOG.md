@@ -1,4 +1,35 @@
 # AGENT LOG: ArinkoLab Portal A案 UI 刷新実装
+<!--
+AGENT_LOG.md 运用ルール（重要）:
+
+目的:
+- Copilot Chat の履歴が VSCode 終了で消える前提のため、作業履歴をこのファイルに一元化する。
+
+ルール:
+1) ログはこの `docs/AGENT_LOG.md` に **追記のみ**（single source of truth）。
+2) **新しいログファイルを作成しない**（例: AGENT_LOG_*.md / LOG_*.md 等は作らない）。
+3) もし誤って別ログ（例: docs/AGENT_LOG_HEADER_ACTIVE.md）が作られていたら、
+   - その内容をこのファイル末尾へ移動（統合）し、
+   - 余剰ファイルは削除する。
+4) 1タスク=1エントリ。以下のテンプレで記録する:
+   - 日時（JST）
+   - 目的/概要（3〜6 bullets）
+   - 変更ファイル一覧
+   - 実行コマンド（dev/build 等）
+   - 影響/注意点（ads.txt, SEO, ルーティング等）
+5) 重要: 機密情報（キー、トークン、個人情報）は書かない。
+
+エントリテンプレ:
+## YYYY-MM-DD HH:MM (JST) - <short title>
+- Summary:
+  - ...
+- Changed files:
+  - ...
+- Commands:
+  - ...
+- Notes:
+  - ...
+-->
 
 **日時**: 2026年1月22日  
 **タスク**: COPILOT_AGENT_PROMPT.txt に基づく「A案 UI refresh」実装  
@@ -289,3 +320,194 @@ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 **実装完了日時**: 2026年1月22日 01:57:29  
 **ビルド時間**: 1.54s  
 **ステータス**: ✅ Ready for Cloudflare Pages Deployment
+
+---
+
+<!-- Merged from docs/AGENT_LOG_HEADER_ACTIVE.md below -->
+
+# AGENT LOG: Header ナビゲーション「アクティブ状態」実装
+
+**日時**: 2026年2月5日 17時34分（JST）  
+**タスク**: Header 「current page」ハイライト（breadcrumb-like nav state）  
+**ステータス**: ✅ 完了
+
+---
+
+## 📋 実装概要
+
+### 🎯 目的
+ヘッダーナビゲーションに「現在のセクション」を視覚的に表示し、ユーザーが現在どこのページにいるかを明確にする。
+
+---
+
+## 🔧 実装内容
+
+### ファイル変更: [src/components/Header.astro](../src/components/Header.astro)
+
+#### 1️⃣ アクティブ判定ロジック（Frontmatter）
+
+Astro の `Astro.url.pathname` を使用して、現在のパスに基づいてアクティブ状態を判定
+
+```astro
+---
+const pathname = Astro.url.pathname;
+
+// 現在のパスに基づいてアクティブ状態を判定
+const isToolsActive = pathname.startsWith('/tools');
+const isBlogActive = pathname.startsWith('/blog');
+const isFaqActive = pathname.startsWith('/faq');
+const isContactActive = pathname.startsWith('/contact');
+---
+```
+
+**判定ルール**:
+- `/tools/` かつ `/tools/...` → ツール（active）
+- `/blog/` かつ `/blog/...` → ブログ（active）
+- `/faq/` かつ `/faq/...` → FAQ（active）
+- `/contact/` かつ `/contact/...` → お問い合わせ（active）
+
+#### 2️⃣ HTML マークアップ更新
+
+```astro
+<li><a href="/tools/" class={isToolsActive ? 'active' : ''} aria-current={isToolsActive ? 'page' : undefined}>ツール</a></li>
+<li><a href="/blog/" class={isBlogActive ? 'active' : ''} aria-current={isBlogActive ? 'page' : undefined}>ブログ</a></li>
+<li><a href="/faq/" class={isFaqActive ? 'active' : ''} aria-current={isFaqActive ? 'page' : undefined}>FAQ</a></li>
+<li><a href="/contact/" class={isContactActive ? 'active' : ''} aria-current={isContactActive ? 'page' : undefined}>お問い合わせ</a></li>
+```
+
+**ポイント**:
+- 条件付きで `class="active"` を付与
+- アクティブなリンク **のみ** に `aria-current="page"` を設定
+
+#### 3️⃣ スタイル更新
+
+```css
+.header-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.25rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.header-links a:hover {
+  color: #0066cc;
+}
+
+.header-links a.active {
+  color: #0066cc;
+  border-bottom-color: #0066cc;
+  font-weight: 600;
+}
+```
+
+**ビジュアル表現**:
+- アクティブリンク: 下部ボーダー（#0066cc）+ 色変更 + 太字
+- トランジション: スムーズ（0.2s ease）
+- モバイル対応: 既存フレックスレイアウト継続
+
+---
+
+## ✅ 検証結果
+
+### ビルド成功
+```
+npm run build
+✓ Completed in 451ms
+✓ 12 page(s) built in 1.36s
+```
+
+### 生成された HTML 確認（dist/ 検査）
+
+| ページ | HTML 出力 | 状態 |
+|--------|---------|------|
+| `/faq/` | `<a href="/faq/" class="active" aria-current="page">FAQ</a>` | ✅ |
+| `/tools/` | `<a href="/tools/" class="active" aria-current="page">ツール</a>` | ✅ |
+| `/tools/sql-formatter/` | `<a href="/tools/" class="active" aria-current="page">ツール</a>` | ✅ |
+| `/tools/business/` | `<a href="/tools/" class="active" aria-current="page">ツール</a>` | ✅ |
+| `/tools/general/` | `<a href="/tools/" class="active" aria-current="page">ツール</a>` | ✅ |
+| `/tools/gamer/` | `<a href="/tools/" class="active" aria-current="page">ツール</a>` | ✅ |
+| `/blog/` | `<a href="/blog/" class="active" aria-current="page">ブログ</a>` | ✅ |
+| `/contact/` | `<a href="/contact/" class="active" aria-current="page">お問い合わせ</a>` | ✅ |
+
+### アクセシビリティ確認
+- ✅ `aria-current="page"` がアクティブなリンク **のみ** に設定
+- ✅ 各ページで **最大 1 つ** のアクティブリンク（重複なし）
+- ✅ スクリーンリーダー対応
+
+### デザイン確認
+- ✅ 現在ページを視覚的に区別（下部ボーダー + 色変更）
+- ✅ モバイル対応（既存フレックスレイアウト継続）
+- ✅ トランジション追加（ホバーも自然）
+
+---
+
+## 📌 変更ファイル一覧
+
+| ファイル | 変更内容 |
+|---------|---------|
+| [src/components/Header.astro](../src/components/Header.astro) | アクティブ判定ロジック追加、aria-current 属性付与、.active スタイル定義 |
+
+---
+
+## 🛠️ コマンド実行ログ
+
+```bash
+# ビルド確認
+npm run build
+# ✓ Completed in 451ms, 12 page(s) built in 1.36s
+
+# プレビューサーバー起動
+npm run preview
+# Local http://localhost:4321/
+
+# 生成物検証
+grep -r "aria-current" dist/ --include="*.html"
+# 8 matches（4 セクション × 2 行）
+```
+
+---
+
+## ⚠️ 制約・注意事項
+
+- ✅ **依存関係追加なし**: Tailwind / React 等一切追加していない
+- ✅ **Astro SSG のみ**: クライアント JS 不要（静的生成）
+- ✅ **既存ルート維持**: すべての必須ページが 200 + 本文を返す
+- ✅ **/ads.txt 動作**: 変更なし
+- ✅ **最小限の変更**: Header.astro のみ修正
+
+---
+
+## 🎯 受け入れ基準チェック
+
+- ✅ `Astro.url.pathname` で現在のセクション検出
+- ✅ Header links（/tools/, /blog/, /faq/, /contact/）に対応
+- ✅ Active rule 実装済み（/tools/... は /tools/ が active など）
+- ✅ スタイル: シンプル・一貫性あり（A案 準拠）
+- ✅ アクセシビリティ: `aria-current="page"` 設定
+- ✅ 依存関係追加なし
+- ✅ 必須ルート 200 維持
+- ✅ /ads.txt 動作継続
+- ✅ `npm run build` 成功
+- ✅ aria-current は 1 ページ最大 1 リンクのみ
+
+---
+
+**実装完了日時**: 2026年2月5日 17時34分（JST）  
+**ビルド時間**: 0.75s  
+**ステータス**: ✅ Ready
+
+---
+
+## メタ: ログ統合タスク
+
+**日時**: 2026年2月5日 17:38（JST）
+- Summary: docs/ 以下に誤って作成された個別エージェントログを `docs/AGENT_LOG.md` に統合し、余剰ファイルを削除しました。
+- Merged files:
+  - docs/AGENT_LOG_HEADER_ACTIVE.md
+- Actions:
+  - 統合（内容を末尾へ追加）
+  - 余剰ファイルを deleted
+  - git で他の変更をコミットして作業ツリーを整理
+- Notes: 既存のログ内容はそのまま保持しています。

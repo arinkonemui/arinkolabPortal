@@ -1,13 +1,23 @@
+---
+const pathname = Astro.url.pathname;
+
+// 現在のパスに基づいてアクティブ状態を判定
+const isToolsActive = pathname.startsWith('/tools');
+const isBlogActive = pathname.startsWith('/blog');
+const isFaqActive = pathname.startsWith('/faq');
+const isContactActive = pathname.startsWith('/contact');
+---
+
 <header>
   <nav class="header-nav">
     <div class="header-brand">
       <a href="/">ArinkoLab</a>
     </div>
     <ul class="header-links">
-      <li><a href="/tools/">ツール</a></li>
-      <li><a href="/blog/">ブログ</a></li>
-      <li><a href="/faq/">FAQ</a></li>
-      <li><a href="/contact/">お問い合わせ</a></li>
+      <li><a href="/tools/" class={isToolsActive ? 'active' : ''} aria-current={isToolsActive ? 'page' : undefined}>ツール</a></li>
+      <li><a href="/blog/" class={isBlogActive ? 'active' : ''} aria-current={isBlogActive ? 'page' : undefined}>ブログ</a></li>
+      <li><a href="/faq/" class={isFaqActive ? 'active' : ''} aria-current={isFaqActive ? 'page' : undefined}>FAQ</a></li>
+      <li><a href="/contact/" class={isContactActive ? 'active' : ''} aria-current={isContactActive ? 'page' : undefined}>お問い合わせ</a></li>
     </ul>
   </nav>
 </header>
@@ -49,10 +59,19 @@
     color: #333;
     text-decoration: none;
     font-weight: 500;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.25rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
   }
 
   .header-links a:hover {
     color: #0066cc;
+  }
+
+  .header-links a.active {
+    color: #0066cc;
+    border-bottom-color: #0066cc;
+    font-weight: 600;
   }
 
   @media (max-width: 768px) {
