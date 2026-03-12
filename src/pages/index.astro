@@ -19,25 +19,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <h2>サービス一覧</h2>
 
   <div class="service-grid">
-    <!-- ビジネス向けアプリ -->
-    <div class="pillar-card">
-      <div class="card-header card-header-business">
-        <h3>ビジネス向けアプリ</h3>
-      </div>
-      <div class="card-body">
-        <p>業務効率化や開発支援を目的としたプロダクティビティツールです。SQLの整形やデータ処理を高速に行えます。</p>
-        <p><a href="/tools/business/">詳細を見る</a></p>
-      </div>
-    </div>
-
-    <!-- 便利アプリ -->
+    <!-- 便利ツール・アプリ -->
     <div class="pillar-card">
       <div class="card-header card-header-general">
-        <h3>便利アプリ</h3>
+        <h3>便利ツール・アプリ</h3>
       </div>
       <div class="card-body">
         <p>日常的に役立つ汎用ツールをご紹介します。テキスト処理や単位変換など、気軽に使えるウェブアプリが揃っています。</p>
-        <p><a href="/tools/general/">詳細を見る</a></p>
+        <p><a href="/apps/">詳細を見る</a></p>
       </div>
     </div>
 
@@ -53,21 +42,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </div>
 
-  <h2>人気ツール</h2>
+  <h2>サイトの歩き方</h2>
 
-  <div class="popular-tool">
-    <div class="tool-accent">
-      <h3>SQL フォーマッター</h3>
-      <p>
-        複雑な SQL クエリを整形します。可読性を高め、デバッグを容易にするための強力なツールです。
-        複数のデータベース方言に対応し、即座に結果を確認できます。
-      </p>
-      <p>
-        <a href="/tools/sql-formatter/">ツール紹介ページを見る</a>
-        または
-        <a href="/tools/sqlformatter/">ツールを開く</a>
-      </p>
-    </div>
+  <div class="guide-section">
+    <p>
+      <a href="/apps/">便利ツール・アプリ</a>のページでは、公開中のすべてのツールを一覧で確認できます。
+      目的やジャンルごとのタグで絞り込みができるので、お探しのツールをすぐに見つけられます。
+    </p>
+    <p class="guide-placeholder">
+      ※ サイト完成後、画面操作の説明用キャプチャをここに掲載予定です。
+    </p>
   </div>
 
   <h2>ご注意</h2>
@@ -92,7 +76,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     margin: 2rem 0;
   }
@@ -114,10 +98,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     animation-delay: 80ms;
   }
 
-  .service-grid .pillar-card:nth-child(3) {
-    animation-delay: 160ms;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .pillar-card {
       animation: none;
@@ -137,10 +117,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: #fff;
   }
 
-  .card-header-business {
-    background-color: var(--pillar-business);
-  }
-
   .card-header-general {
     background-color: var(--pillar-general);
   }
@@ -153,22 +129,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 1.5rem;
   }
 
-  .popular-tool {
+  .guide-section {
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     background-color: #fff;
     margin: 1.5rem 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
-  .tool-accent {
-    border-left: 4px solid var(--pillar-business);
-    padding-left: 1rem;
+  .guide-placeholder {
+    color: #888;
+    font-size: 0.9rem;
+    font-style: italic;
   }
 
-  .tool-accent h3 {
-    margin-top: 0;
-    color: var(--pillar-business);
+  @media (max-width: 768px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

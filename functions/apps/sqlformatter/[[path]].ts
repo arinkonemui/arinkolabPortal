@@ -4,6 +4,6 @@ export const onRequest: PagesFunction = async (context) => {
   return proxyRequest(
     context.request,
     'https://sqlformatterweb.pages.dev',
-    '/tools/sqlformatter'
+    '/apps/sqlformatter'
   );
 };

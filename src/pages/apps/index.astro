@@ -1,0 +1,285 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Tool {
+  name: string;
+  description: string;
+  url: string;
+  categoryTags: string[];
+  genreTags: string[];
+}
+
+const tools: Tool[] = [
+  {
+    name: "SQL Formatter",
+    description: "SQL を読みやすく整形するオンラインツール。",
+    url: "/apps/sqlformatter/",
+    categoryTags: ["Business", "Developer"],
+    genreTags: ["SQL", "Formatter"],
+  },
+];
+
+const allCategoryTags = [...new Set(tools.flatMap(t => t.categoryTags))];
+const allGenreTags = [...new Set(tools.flatMap(t => t.genreTags))];
+---
+
+<BaseLayout
+  title="便利ツール・アプリ"
+  description="ArinkoLabの便利ツール・アプリ一覧。目的やジャンルで絞り込んで、お探しのツールを見つけられます。"
+>
+  <h1>便利ツール・アプリ</h1>
+
+  <p>
+    ArinkoLabで公開されているツールの一覧です。
+    タグで絞り込んで、お探しのツールを見つけてください。
+  </p>
+
+  <div class="filter-section">
+    <div class="filter-row">
+      <span class="filter-label">カテゴリ</span>
+      <div class="filter-tags" id="category-filters">
+        <button class="tag-btn active" data-filter="category" data-value="All">All</button>
+        {allCategoryTags.map(tag => (
+          <button class="tag-btn" data-filter="category" data-value={tag}>{tag}</button>
+        ))}
+      </div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">タグ</span>
+      <div class="filter-tags" id="genre-filters">
+        <button class="tag-btn active" data-filter="genre" data-value="All">All</button>
+        {allGenreTags.map(tag => (
+          <button class="tag-btn" data-filter="genre" data-value={tag}>{tag}</button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="tools-grid" id="tools-grid">
+    {tools.map(tool => (
+      <div
+        class="tool-card"
+        data-categories={tool.categoryTags.join(",")}
+        data-genres={tool.genreTags.join(",")}
+      >
+        <h3 class="tool-name">{tool.name}</h3>
+        <p class="tool-description">{tool.description}</p>
+        <div class="tool-tags">
+          {tool.categoryTags.map(tag => (
+            <span class="badge badge-category">{tag}</span>
+          ))}
+          {tool.genreTags.map(tag => (
+            <span class="badge badge-genre">{tag}</span>
+          ))}
+        </div>
+        <a href={tool.url} class="tool-link">開く &rarr;</a>
+      </div>
+    ))}
+  </div>
+
+  <div class="empty-message" id="empty-message" style="display: none;">
+    該当するツールが見つかりませんでした。
+  </div>
+
+  <h2>ご注意</h2>
+  <ul>
+    <li>機密情報（パスワード、API キー、個人情報）を入力しないようお願いします</li>
+    <li>ツールの出力結果の正確性は保証いたしません。重要な処理では必ず検証してください</li>
+    <li>詳細は<a href="/terms/">利用規約</a>をご覧ください</li>
+  </ul>
+</BaseLayout>
+
+<style>
+  .filter-section {
+    background-color: #f0f5ff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .filter-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .filter-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    min-width: 5rem;
+  }
+
+  .filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-btn {
+    background: #fff;
+    border: 1px solid #d0d5dd;
+    border-radius: 20px;
+    padding: 0.35rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #333;
+    transition: all 0.15s ease;
+  }
+
+  .tag-btn:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+  }
+
+  .tag-btn.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .tool-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .tool-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .tool-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+  }
+
+  .tool-description {
+    font-size: 0.9rem;
+    color: #555;
+    flex: 1;
+  }
+
+  .tool-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  .badge-category {
+    background: #e0f2fe;
+    color: #0369a1;
+  }
+
+  .badge-genre {
+    background: #f0f0f0;
+    color: #555;
+  }
+
+  .tool-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+  }
+
+  .tool-link:hover {
+    text-decoration: underline;
+  }
+
+  .empty-message {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #888;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    .filter-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .filter-label {
+      min-width: auto;
+    }
+
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let activeCategory = 'All';
+    let activeGenre = 'All';
+
+    const cards = document.querySelectorAll<HTMLElement>('.tool-card');
+    const emptyMsg = document.getElementById('empty-message')!;
+
+    function filterCards() {
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const categories = card.dataset.categories!.split(',');
+        const genres = card.dataset.genres!.split(',');
+
+        const matchCategory = activeCategory === 'All' || categories.includes(activeCategory);
+        const matchGenre = activeGenre === 'All' || genres.includes(activeGenre);
+
+        if (matchCategory && matchGenre) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      emptyMsg.style.display = visibleCount === 0 ? '' : 'none';
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.tag-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filterType = btn.dataset.filter!;
+        const value = btn.dataset.value!;
+
+        if (filterType === 'category') {
+          activeCategory = value;
+        } else {
+          activeGenre = value;
+        }
+
+        const container = btn.closest('.filter-tags')!;
+        container.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        filterCards();
+      });
+    });
+  });
+</script>

@@ -2,7 +2,7 @@
 const pathname = Astro.url.pathname;
 
 // 現在のパスに基づいてアクティブ状態を判定
-const isToolsActive = pathname.startsWith('/tools');
+const isAppsActive = pathname.startsWith('/apps');
 const isBlogActive = pathname.startsWith('/blog');
 const isFaqActive = pathname.startsWith('/faq');
 const isContactActive = pathname.startsWith('/contact');
@@ -14,7 +14,7 @@ const isContactActive = pathname.startsWith('/contact');
       <a href="/">ArinkoLab</a>
     </div>
     <ul class="header-links">
-      <li><a href="/tools/" class={isToolsActive ? 'active' : ''} aria-current={isToolsActive ? 'page' : undefined}>ツール</a></li>
+      <li><a href="/apps/" class={isAppsActive ? 'active' : ''} aria-current={isAppsActive ? 'page' : undefined}>ツール</a></li>
       <li><a href="/blog/" class={isBlogActive ? 'active' : ''} aria-current={isBlogActive ? 'page' : undefined}>ブログ</a></li>
       <li><a href="/faq/" class={isFaqActive ? 'active' : ''} aria-current={isFaqActive ? 'page' : undefined}>FAQ</a></li>
       <li><a href="/contact/" class={isContactActive ? 'active' : ''} aria-current={isContactActive ? 'page' : undefined}>お問い合わせ</a></li>
