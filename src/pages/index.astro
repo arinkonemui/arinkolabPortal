@@ -20,26 +20,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <div class="service-grid">
     <!-- 便利ツール・アプリ -->
-    <div class="pillar-card">
+    <a class="pillar-card" href="/apps/">
       <div class="card-header card-header-general">
         <h3>便利ツール・アプリ</h3>
       </div>
       <div class="card-body">
         <p>日常的に役立つ汎用ツールをご紹介します。テキスト処理や単位変換など、気軽に使えるウェブアプリが揃っています。</p>
-        <p><a href="/apps/">詳細を見る</a></p>
       </div>
-    </div>
+    </a>
 
     <!-- ブログ -->
-    <div class="pillar-card">
+    <a class="pillar-card" href="/blog/">
       <div class="card-header card-header-blog">
         <h3>ブログ</h3>
       </div>
       <div class="card-body">
         <p>開発ログから日常の気づき、ゲーム攻略まで。幅広いテーマで、定期的に更新される記事をお楽しみください。</p>
-        <p><a href="/blog/">詳細を見る</a></p>
       </div>
-    </div>
+    </a>
   </div>
 
   <h2>サイトの歩き方</h2>
@@ -82,12 +80,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .pillar-card {
+    display: block;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     animation: slideInFade 0.6s ease-out forwards;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .pillar-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .service-grid .pillar-card:nth-child(1) {

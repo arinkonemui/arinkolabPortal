@@ -57,8 +57,9 @@ const allGenreTags = [...new Set(tools.flatMap(t => t.genreTags))];
 
   <div class="tools-grid" id="tools-grid">
     {tools.map(tool => (
-      <div
+      <a
         class="tool-card"
+        href={tool.url}
         data-categories={tool.categoryTags.join(",")}
         data-genres={tool.genreTags.join(",")}
       >
@@ -72,8 +73,7 @@ const allGenreTags = [...new Set(tools.flatMap(t => t.genreTags))];
             <span class="badge badge-genre">{tag}</span>
           ))}
         </div>
-        <a href={tool.url} class="tool-link">開く &rarr;</a>
-      </div>
+      </a>
     ))}
   </div>
 
@@ -159,6 +159,9 @@ const allGenreTags = [...new Set(tools.flatMap(t => t.genreTags))];
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
 
   .tool-card:hover {
@@ -199,17 +202,6 @@ const allGenreTags = [...new Set(tools.flatMap(t => t.genreTags))];
   .badge-genre {
     background: #f0f0f0;
     color: #555;
-  }
-
-  .tool-link {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #2563eb;
-    text-decoration: none;
-  }
-
-  .tool-link:hover {
-    text-decoration: underline;
   }
 
   .empty-message {
