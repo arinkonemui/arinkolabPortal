@@ -24,6 +24,13 @@ const tools: Tool[] = [
     categoryTags: ["Developer"],
     genreTags: ["XML", "Formatter"],
   },
+  {
+    name: "JSON Formatter",
+    description: "JSON データを整形・見やすく表示するツール。",
+    url: "/apps/jsonformatter/",
+    categoryTags: ["Developer"],
+    genreTags: ["JSON", "Formatter"],
+  },
 ];
 
 const allCategoryTags = [...new Set(tools.flatMap(t => t.categoryTags))];
