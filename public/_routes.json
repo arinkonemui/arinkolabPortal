@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "include": ["/blog/*", "/apps/sqlformatter/*"],
+  "include": ["/blog/*", "/apps/sqlformatter/*", "/apps/xmlformatter/*"],
   "exclude": []
 }

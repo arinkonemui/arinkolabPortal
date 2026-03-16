@@ -17,6 +17,13 @@ const tools: Tool[] = [
     categoryTags: ["Business", "Developer"],
     genreTags: ["SQL", "Formatter"],
   },
+  {
+    name: "XML Formatter",
+    description: "XML を整形して読みやすくするツール。",
+    url: "/apps/xmlformatter/",
+    categoryTags: ["Developer"],
+    genreTags: ["XML", "Formatter"],
+  },
 ];
 
 const allCategoryTags = [...new Set(tools.flatMap(t => t.categoryTags))];
