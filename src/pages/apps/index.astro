@@ -31,6 +31,13 @@ const tools: Tool[] = [
     categoryTags: ["Business", "Developer"],
     genreTags: ["JSON", "Formatter"],
   },
+  {
+    name: "家計簿",
+    description: "収入・支出を記録して家計を管理するツール。",
+    url: "/apps/kakeibo/",
+    categoryTags: ["Life"],
+    genreTags: ["家計簿", "Money"],
+  },
 ];
 
 const allCategoryTags = [...new Set(tools.flatMap(t => t.categoryTags))];
